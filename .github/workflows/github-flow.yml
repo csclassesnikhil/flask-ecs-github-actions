@@ -29,3 +29,11 @@ jobs:
           IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:latest"
           docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
+
+      - name: Update ECS Service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ecs-task-def.json
+          service: my-sample-service
+          cluster: sample-cluster
+          wait-for-service-stability: true    
