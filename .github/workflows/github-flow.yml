@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production   # 👈 Pull secrets from this environment
+    environment: MY_ENV   # 👈 Pull secrets from this environment
 
     steps:
       - name: Checkout source code
