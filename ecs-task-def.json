@@ -1,0 +1,30 @@
+{
+  "family": "myapp-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::472444779681:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::472444779681:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "myapp",
+      "image": "472444779681.dkr.ecr.us-east-1.amazonaws.com/flask-github-repo:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/myapp",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
